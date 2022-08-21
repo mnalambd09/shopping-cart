@@ -21,22 +21,31 @@ function updatephonePrice(totalPhone){
 }
 
 function getSubtotal(){
-        const phoneprice = document.getElementById('phone-total');
+    const phoneprice = document.getElementById('phone-total');
     const phonetotalPriceString = phoneprice.innerText;
     const phonepriceValue = parseInt(phonetotalPriceString);
     const caseprice = document.getElementById('case-total');
     const casetotalPriceString = caseprice.innerText;
     const casepriceValue = parseInt(casetotalPriceString);
     
-    // const phonePrice = getPrice('phone-total');
-    // const casePrice = getPrice('case-total');
     const subtotalPrice = phonepriceValue + casepriceValue;
     const subTotal = document.getElementById('sub-total');
     const subTotalString = subTotal.innerText;
     const subtotalValue = parseFloat(subTotalString);
     subTotal.innerText = subtotalPrice;
-    return subtotalPrice;
+
+    const taxField = document.getElementById('tax-amount');
+    const taxcalculation = (subtotalValue*15)/100;
+    taxField.innerText = taxcalculation;
+
+    const grandTotal = document.getElementById('final-total');
+    const grandTotalString = grandTotal.innerText;
+    const grandTotalValue = parseFloat(grandTotalString);
+    const grand = subtotalValue + taxcalculation;
+    grandTotal.innerText = grand;
+    
     }
+    
 document.getElementById('btn-phone-plus').addEventListener('click', function(){
     const totalPhone = updateCase(true);
     updatephonePrice(totalPhone);
@@ -50,38 +59,3 @@ document.getElementById('btn-phone-minus').addEventListener('click', function(){
     getSubtotal();
    
 })
-
-// subtotal calculation
-// function getPrice(priceValue){
-//     let price = getElementById(priceValue);
-//     let totalPriceString = price.innerText;
-//     let priceValue = parseInt(totalPriceString);
-//     // console.log(price);
-//     // return price;
-// }
-// document.getElementById(phoneTotal).addEventListener('click', function(){
-//     const phoneprice = document.getElementById('phone-total');
-// const phonetotalPriceString = phoneprice.innerText;
-// const phonepriceValue = parseInt(phonetotalPriceString);
-// const caseprice = document.getElementById('case-total');
-// const casetotalPriceString = caseprice.innerText;
-// const casepriceValue = parseInt(casetotalPriceString);
-
-// // const phonePrice = getPrice('phone-total');
-// // const casePrice = getPrice('case-total');
-// const subtotalPrice = phonepriceValue + casepriceValue;
-// const subTotal = document.getElementById('sub-total');
-// const subTotalString = subTotal.innerText;
-// const subtotalValue = parseFloat(subTotalString);
-// subTotal.innerText = subtotalPrice;
-// })
-
-// tax calculation
-
-const tax = getSubtotal();
-console.log(tax);
-const taxcalculation = (tax/15)*100;
-const taxField = document.getElementById('tax-amount');
-const taxString = taxField.innerText;
-const taxValue = parseFloat(taxString);
-taxField.innerText = taxcalculation;
